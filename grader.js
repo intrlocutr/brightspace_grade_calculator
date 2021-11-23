@@ -24,16 +24,16 @@ var maxPoints = 0;
 for (var i = 1; i < rows.length; i++) {
     // since heading rows have the same # of columns as the first row,
     // look only for rows with more columns
-    // or, if this table, has no heading rows, do all rows
+    // or, if this table has no heading rows, do all rows
     if (noHeadingRows || rows[i].cells.length > numCols) {
-	// score is formatted "earned / possible"
-	var points = rows[i].cells[pointsCol].textContent.split(" / ");
-	// if earned points is "-", don't count it
-	if (points[0] != "-") {
+        // score is formatted "earned / possible"
+        var points = rows[i].cells[pointsCol].textContent.split(" / ");
+        // if earned points is "-", don't count it
+        if (points[0] != "-") {
             totalPoints += Number(points[0]);
             // if nothing to the right of the slash, that score is extra credit
             maxPoints += points[1] ? Number(points[1]) : 0;
-	}
+        }
     }
 }
 
