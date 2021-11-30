@@ -22,13 +22,14 @@ if (location.hostname.indexOf("brightspace.com") != -1 && location.pathname == "
     var totalPoints = 0;
     // possible points
     var maxPoints = 0;
+    var points;
     for (var i = 1; i < rows.length; i++) {
         // since heading rows have the same # of columns as the first row,
         // look only for rows with more columns
         // or, if this table has no heading rows, do all rows
         if (noHeadingRows || rows[i].cells.length > numCols) {
             // score is formatted "earned / possible"
-            var points = rows[i].cells[pointsCol].textContent.split(" / ");
+            points = rows[i].cells[pointsCol].textContent.split(" / ");
             // if earned points is "-", don't count it
             if (points[0] != "-") {
                 totalPoints += Number(points[0]);
