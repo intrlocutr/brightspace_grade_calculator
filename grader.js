@@ -23,18 +23,19 @@ if (location.hostname.indexOf("brightspace.com") != -1 && location.pathname == "
     // possible points
     var maxPoints = 0;
     var points;
+    var pointsRegex = /([\d-\.]+)(?: \/ ([\d-\.]+))?/;
     for (var i = 1; i < rows.length; i++) {
         // since heading rows have the same # of columns as the first row,
         // look only for rows with more columns
         // or, if this table has no heading rows, do all rows
         if (noHeadingRows || rows[i].cells.length > numCols) {
             // score is formatted "earned / possible"
-            points = rows[i].cells[pointsCol].textContent.split(" / ");
+            points = pointsRegex.exec(rows[i].cells[pointsCol].textContent);
             // if earned points is "-", don't count it
-            if (points[0] != "-") {
-                totalPoints += Number(points[0]);
+            if (points[1] != "-") {
+                totalPoints += Number(points[1]);
                 // if nothing to the right of the slash, that score is extra credit
-                maxPoints += points[1] ? Number(points[1]) : 0;
+                maxPoints += points[2] ? Number(points[2]) : 0;
             }
         }
     }
